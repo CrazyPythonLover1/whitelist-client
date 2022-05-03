@@ -11,7 +11,6 @@ export const handleSubscription = async (e, photoRef, nameRef, emailRef, imageUr
      // add subscriptionData info at mongodb
      try {
         // setMessage("");
-        console.log('subscriptionData', subscriptionData)
         const url = "https://whitelist-backend-server.herokuapp.com/users/subscriptions";
         const option = {
           method: "POST",

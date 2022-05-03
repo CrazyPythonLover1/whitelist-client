@@ -3,11 +3,12 @@ import React, { useRef, useState } from "react";
 import { MdClear } from "react-icons/md";
 import Metamask from "../../../assets/img/metamask.png";
 import { WalletUserContext } from "../../../contexts/wallet-context";
-import { handleSubscription } from "../../../services/subscription";
+import { TYPES } from "../../../contexts/wallet-context/Types";
+import { getSubscription, handleSubscription } from "../../../services/subscription";
 import { shortenAddress } from "../../../utils/constants";
 
 const ProfileDetailsModal = ({ hideProfileDetailsModal }) => {
-  const { state, disconnectWallet } = WalletUserContext();
+  const { state, dispatch, disconnectWallet } = WalletUserContext();
   const { account } = state;
 
   const [imageUrl, setImageUrl] = useState("");
@@ -41,6 +42,24 @@ const ProfileDetailsModal = ({ hideProfileDetailsModal }) => {
       });
   };
   
+  const handleUpdateSubscription = async () => {
+    
+      let payload = {};
+      if (account) {
+        const userSubscription = await getSubscription(account);
+        payload = { userSubscription };
+      }
+      dispatch({
+        type: TYPES.UPDATE_CONNECTED_WALLET,
+        payload: payload,
+      });
+ 
+  };
+
+  const handleSubscriptionAndUpdateWallet = async (e) => {
+    await handleSubscription(e, photoRef, nameRef, emailRef, imageUrl, account)
+    handleUpdateSubscription();
+  }
   return (
     <div className="wlupdatemodal">
       <div className="wlupdatecontent">
@@ -68,7 +87,7 @@ const ProfileDetailsModal = ({ hideProfileDetailsModal }) => {
               <label htmlFor="">Email</label>
               <input ref={emailRef} type="text" placeholder="Enter Your Email Address" />
             </div>
-            <button className="dark-blue-btn-filled" onClick={(e) => handleSubscription(e, photoRef, nameRef, emailRef, imageUrl, account)}>Update Profile</button>
+            <button className="dark-blue-btn-filled" onClick={handleSubscriptionAndUpdateWallet}>Update Profile</button>
           </div>
         </div>
       </div>
