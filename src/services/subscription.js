@@ -12,7 +12,7 @@ export const handleSubscription = async (e, photoRef, nameRef, emailRef, imageUr
      try {
         // setMessage("");
         console.log('subscriptionData', subscriptionData)
-        const url = "https://cors-anywhere.herokuapp.com/https://whitelist-backend-server.herokuapp.com/users/subscriptions";
+        const url = "https://whitelist-backend-server.herokuapp.com/users/subscriptions";
         const option = {
           method: "POST",
           headers: {
@@ -36,19 +36,12 @@ export const handleSubscription = async (e, photoRef, nameRef, emailRef, imageUr
 export const getSubscription = async (account) => {
     try {
         // setMessage("");
-        const url = `https://cors-anywhere.herokuapp.com/https://whitelist-backend-server.herokuapp.com/users/getSubscriptionByAccount?account=${account}`;
+        const url = `https://whitelist-backend-server.herokuapp.com/users/getSubscriptionByAccount?account=${account}`;
 
         const option = {
           method: "GET",
           headers: {
-            // "Content-type": "application/json",
-            // "Access-Control-Allow-Origin": "*",
-            // "Access-Control-Allow-Credentials": true
             'Content-Type': 'application/json',
-      // 'Access-Control-Allow-Origin': '*',
-      // 'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-      // 'Access-Control-Allow-Headers':
-      //   'Origin, Content-Type, X-api-key, Authorization, Accept,charset,boundary,Content-Length',
           },          
         };
         const response = await fetch(url);
