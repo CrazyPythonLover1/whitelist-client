@@ -57,6 +57,7 @@ const ProfileDetailsModal = ({ hideProfileDetailsModal }) => {
   };
 
   const handleSubscriptionAndUpdateWallet = async (e) => {
+    console.log('first', photoRef, nameRef, emailRef, imageUrl, account)
     await handleSubscription(e, photoRef, nameRef, emailRef, imageUrl, account)
     handleUpdateSubscription();
   }

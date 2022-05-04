@@ -8,6 +8,7 @@ export const handleSubscription = async (e, photoRef, nameRef, emailRef, imageUr
         account
       };
 
+      console.log('subscriptionData', subscriptionData)
      // add subscriptionData info at mongodb
      try {
         // setMessage("");
